@@ -32,7 +32,9 @@ var Phaser = {
     Input: require('./input'),
     Loader: require('./loader'),
     Math: require('./math'),
-    Physics: require('./physics'),
+    Physics: {
+        Arcade: require('./physics/arcade')
+    },
     Plugins: require('./plugins'),
     Renderer: require('./renderer'),
     Scale: require('./scale'),
