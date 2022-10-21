@@ -4,15 +4,16 @@ var config = {
   physics: {
       default: 'arcade',
       arcade: {
-          debug: false
+          debug: false,
+          gravity:{ y: 0}
       }
   },
   backgroundColor: 0x000000,
-  scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene],
-  pixelArt: true,
-  _playerShip: 0,
-  _gravityIndex: 0,
-  _planetIndex: 0
+  scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene],
+  pixelArt: true
+
+
 }
+
 
 var game = new Phaser.Game(config);

@@ -20,8 +20,6 @@ class OptionsScene extends Phaser.Scene {
       }
     
       create() {
-        //this.background = this.add.image(0, 0, "background").setOrigin(0,0);
-    
         //Metto bg
         this.add.image(0, 0, "background").setOrigin(0,0);
     
@@ -39,14 +37,13 @@ class OptionsScene extends Phaser.Scene {
         this.gravityButtonSelected.setInteractive();
         this.gravityButtonSelected.visible = false;
         this.gravityButtonSelected.on("pointerdown", () => {   
-          this.game.config._gravityIndex = 0
-
+          this.registry.set('gravityIndex', 0);
         })
 
         //Gravity
         this.gravityButton.setInteractive();
         this.gravityButton.on("pointerdown", () => {   
-          this.game.config._gravityIndex = 1
+          this.registry.set('gravityIndex', 1);
         })
     
     
@@ -54,13 +51,13 @@ class OptionsScene extends Phaser.Scene {
         this.planetButtonSelected.setInteractive();
         this.planetButtonSelected.visible = false;
         this.planetButtonSelected.on("pointerdown", () => {
-          this.game.config._planetIndex = 0
+          this.registry.set('planetIndex', 0);
         })
 
         //Planet
         this.planetButton.setInteractive();
         this.planetButton.on("pointerdown", () => {
-          this.game.config._planetIndex = 1
+          this.registry.set('planetIndex', 1);
         })
     
         
@@ -79,34 +76,34 @@ class OptionsScene extends Phaser.Scene {
 
       update() {
         //gravity
-        if( this.game.config._gravityIndex == 1){
+        if( this.registry.get('gravityIndex') == 1){
           //GravitySelected
           this.gravityButtonSelected.visible = true;
           this.gravityButton.visible = false;
 
-        }else if(this.game.config._gravityIndex == 0){
+        }else if(this.registry.get('gravityIndex') == 0){
           //GravitySelected
           this.gravityButtonSelected.visible = false;
           this.gravityButton.visible = true;
         }
 
         //planet
-        if(this.game.config._planetIndex == 1){
+        if(this.registry.get('planetIndex') == 1){
           //PlanetSelected
           this.planetButtonSelected.visible = true;
           this.planetButton.visible = false;
 
-        }else if(this.game.config._planetIndex == 0){
+        }else if(this.registry.get('planetIndex') == 0){
           //PlanetSelected
           this.planetButtonSelected.visible = false;
           this.planetButton.visible = true;
         }
 
-        if ( typeof this.game.config._planetIndex === 'undefined' || typeof this.game.config._gravityIndex === 'undefined'){
-          this.game.config._gravityIndex = 0;
-          this.game.config._planetIndex = 0;
+        if (  this.registry.get('planetIndex') === 'undefined' ||  this.registry.get('gravityIndex') === 'undefined'){
+          this.registry.set('gravityIndex', 0);
+          this.registry.set('planetIndex', 0);
         }else{
-          console.log( this.game.config._gravityIndex);
+          console.log( this.registry.get('planetIndex'));
           //console.log( this.game.config._planetIndex);
         }
       }     

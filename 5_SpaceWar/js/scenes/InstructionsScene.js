@@ -20,11 +20,11 @@ class InstructionsScene extends Phaser.Scene {
         this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 - 100, "tableInstructions");
 
         //Aggiungo i bottoni  
-        let backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 200, "back");
+        this.backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 200, "back");
     
         //Back
-        backButton.setInteractive();
-        backButton.on("pointerup", () => {
+        this.backButton.setInteractive();
+        this.backButton.on("pointerup", () => {
             this.scene.start("MenuGame");
         })
       }
