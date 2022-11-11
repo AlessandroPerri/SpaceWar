@@ -1,48 +1,63 @@
+
+//import Ship from '../sprites/Ship.js'
 class SinglePlayerScene extends Phaser.Scene {
+  
     constructor() {
       super({key: 'SinglePlayerScene'});
+      this.ship;
     }
+    
   
     preload(){
         this.load.image("ship1", "assets/images/ship1.png");
         this.load.image("ship2", "assets/images/ship2.png");
+        this.load.image("laser", "assets/images/Laser.png");
         
-      
     }
   
     create() {
+      this.createShip();
+      this.text = this.add.text(32, 32, { color: '#fff' });
+      //Keys player1
+      this.player1Keys = {
+        up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+        left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+        special: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+        right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+        missile: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
+        laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
+      };
+
+      //Keys player2
+      this.player2Keys = {
+        up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+        left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+        special: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+        right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+        missile: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
+        laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
+      };
         //Ship
-        console.log(this.registry.get('playerShip'));
-        if(this.registry.get('playerShip') == 1){
-            this.ship = this.physics.add.sprite(0, 400, "ship1").setOrigin(0, 400);  
-            console.log("ship1 creata");
-            this.ship.setCollideWorldBounds(true);
-  
-        }else if(this.registry.get('playerShip') == 2){
-            this.ship = this.physics.add.sprite(100, 400, "ship2");  
-            console.log("ship2 creata");
-            this.ship.setCollideWorldBounds(true);
-        }
-        this.cursors = this.input.keyboard.createCursorKeys();
-        this.keys = this.input.keyboard.addKeys({ up: 'W', left: 'A', down: 'S', right: 'D' });
+      if(this.game.config._playerShip == 1){
+        this.ship.setTexture('ship1');
+        console.log("ship1 creata");
+
+      }else if(this.game.config._playerShip == 2){
+        this.ship.setTexture('ship2');
+        console.log("ship2 creata");
+
+      }
     }
+    createShip(){
+      this.ship = new Ship({
+        scene: this,
+        texture: 'ship1',
+        x: 100,
+        y: 400
+      });
+    }
+
     update(){
-        if(this.cursors.left.isDown){
-          this.ship.setVelocityX(-100);
-        }else if(this.cursors.right.isDown){
-          this.ship.setVelocityX(100);
-        }else if(this.cursors.up.isDown){
-          this.ship.setVelocityY(-100);
-        }else if(this.cursors.down.isDown){
-          this.ship.setVelocityY(100);
-        }else{
-          this.ship.setVelocityX(0);
-          this.ship.setVelocityY(0);
-        }
-        if (this.cursors.up.isDown) {
-            this.physics.velocityFromRotation(this.ship.rotation + 1.5, 100, this.ship.body.acceleration);
-          } else {
-            this.ship.setAcceleration(0);
-          }
+      this.ship.update(this.player1Keys); 
     }
 }

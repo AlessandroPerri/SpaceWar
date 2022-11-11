@@ -36,7 +36,9 @@ class SpaceshipScene extends Phaser.Scene {
         //Ship1
         this.ship1Button.setInteractive();
         this.ship1Button.on("pointerdown", () => {
-          this.registry.set('playerShip', 1);
+          this.game.config._playerShip = 1;
+          //this.registry.set('playerShip', 1);
+          console.log( this.game.config._playerShip);
           console.log('ship 1 clicked');
         })
 
@@ -47,12 +49,13 @@ class SpaceshipScene extends Phaser.Scene {
         //Ship2
         this.ship2Button.setInteractive();
         this.ship2Button.on("pointerdown", () => {
-          this.registry.set('playerShip', 2);
-          console.log(this.registry.get('playerShip'));
+          this.game.config._playerShip = 2;
+          //this.registry.set('playerShip', 2);
+          console.log(this.game.config._playerShip);
           console.log('ship 2 clicked');
         })
 
-        console.log(this.registry.get('playerShip'));
+        console.log( this.game.config.playerShip);
         //Back
         this.backButton.setInteractive();
         this.backButton.on("pointerup", () => {
@@ -62,14 +65,14 @@ class SpaceshipScene extends Phaser.Scene {
       }
 
       update() {
-        if( this.registry.get('playerShip') == 1){
+        if(this.game.config._playerShip == 1){
           //Ship1Selected
           this.ship1ButtonSelected.visible = true;
           this.ship1Button.visible = false;
           this.ship2Button.visible = true;
           this.ship2ButtonSelected.visible = false;
 
-        }else if(this.registry.get('playerShip') == 2){
+        }else if(this.game.config._playerShip == 2){
           //Ship1Selected
           this.ship2ButtonSelected.visible = true;
           this.ship2Button.visible = false;
@@ -77,10 +80,11 @@ class SpaceshipScene extends Phaser.Scene {
           this.ship1ButtonSelected.visible = false;
 
         }
-        if ( typeof this.registry.get('playerShip') === 'undefined'){
-          this.registry.set('playerShip', 1);
+        if ( typeof this.game.config._playerShip === 'undefined'){
+          //this.registry.set('playerShip', 1);
+          this.game.config._playerShip = 1;
         }else{
-          console.log( this.registry.get('playerShip'));
+          console.log( this.game.config._playerShip);
         }
       }     
 }

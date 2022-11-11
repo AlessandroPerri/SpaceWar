@@ -14,8 +14,6 @@ class PlayScene extends Phaser.Scene {
       }
     
       create() {
-        //this.background = this.add.image(0, 0, "background").setOrigin(0,0);
-    
         //Metto bg
         this.add.image(0, 0, "background").setOrigin(0,0);
 
@@ -46,6 +44,6 @@ class PlayScene extends Phaser.Scene {
       }
 
       update(){
-        console.log("play: " + this.game.config._playerShip);
+        console.log("setting up playerShip: " + this.registry.get('playerShip'));
       }      
 }

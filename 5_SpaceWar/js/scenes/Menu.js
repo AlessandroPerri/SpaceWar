@@ -24,9 +24,11 @@ class Menu extends Phaser.Scene {
 
   create() {
     //VARIABILI GLOBALI
+    
     this.registry.set('playerShip', 1);
     this.registry.set('gravityIndex', 0);
     this.registry.set('planetIndex', 0);
+    
 
 
     //Metto bg e title
@@ -66,7 +68,7 @@ class Menu extends Phaser.Scene {
   }
 
   update(){
-    console.log("menu:" + this.registry.get('playerShip'));
+    console.log(this.game.config._playerShip);
   }
 
 }
