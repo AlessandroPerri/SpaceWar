@@ -15,6 +15,7 @@ var config = {
   _playerShip: 1,
   _planetIndex: 0,
   _gravityIndex: 0,
+  _speedBullet: 500,
   scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene],
 
  
@@ -25,3 +26,4 @@ var game = new Phaser.Game(config);
 game.config._playerShip = 1;
 game.config._planetIndex = 0;
 game.config._gravityIndex = 0;
+game.config._speedBullet= 500;

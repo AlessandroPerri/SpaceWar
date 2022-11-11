@@ -4,28 +4,25 @@ class Ship extends Phaser.GameObjects.Sprite{
 
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        /*
-        this.body.allowDrag = true;
-        this.body.angularDrag = 150;
-        this.body.setDamping(true);
-        this.body.setDrag(0.99);
-        this.body.setMaxVelocity(200);
-        this.body.acceleration = 50;
-        */
-        this.body.setDamping(true);
-        this.body.setDrag(1);
-        this.body.setMaxVelocity(200);
-        this.body.setCollideWorldBounds(true);
 
-       
+        //decellerazione attiva
+        this.body.setDamping(true);
+
+        //ship rallenta da sola
+        this.body.setDrag(0.5);
+
+        this.body.setMaxVelocity(200);
+        this.body.setCollideWorldBounds(true);     
+        
+        this.lastFired = null;
+        this.fireInterval = 1;
+        
     }
-    create(){
-        this.createLaser();
+    assignBullets(bullets){
+        this.bullets = bullets;
     }
-    createLaser(){
-        this.laser = new Laser();
-    }
-    update(keys){
+
+    update(keys, time){
         if(keys == null){
 
         }else{
@@ -61,17 +58,22 @@ class Ship extends Phaser.GameObjects.Sprite{
             } else if(keys.missile.isDown) {
                 console.log('Missile sparato')
     
-            //E
-            } else if(keys.laser.isDown) {
-                var bullet = this.laser.get();
+            //E cliccato
+            } else if(Phaser.Input.Keyboard.JustDown(keys.laser)) {
+                var bullet = this.bullets.get();
         
                 if (bullet)
                 {
-                    this.bullet.fire(this.body);
-                    this.bullet.setDepth( this.depth -1 );
-                    console.log('Laser sparato')
+                    bullet.fire(this, 500);
+                    console.log('Laser sparato')      
+                    bullet.setDepth( this.depth -1 );
+                    
+                    console.log('LASTFIRED: ' +  this.lastFired)
+                    console.log('TIME: ' +  this.time)  
+                    
                 }
-                
+               
+                   
             }
         }
         this.scene.physics.world.wrap(this.body, 32);

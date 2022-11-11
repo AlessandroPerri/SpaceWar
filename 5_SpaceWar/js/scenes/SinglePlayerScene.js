@@ -5,6 +5,8 @@ class SinglePlayerScene extends Phaser.Scene {
     constructor() {
       super({key: 'SinglePlayerScene'});
       this.ship;
+      this.bullets;
+      
     }
     
   
@@ -16,8 +18,10 @@ class SinglePlayerScene extends Phaser.Scene {
     }
   
     create() {
+      //SHIP--------------------------------------------------------------
       this.createShip();
       this.text = this.add.text(32, 32, { color: '#fff' });
+
       //Keys player1
       this.player1Keys = {
         up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
@@ -28,16 +32,7 @@ class SinglePlayerScene extends Phaser.Scene {
         laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
       };
 
-      //Keys player2
-      this.player2Keys = {
-        up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
-        left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
-        special: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
-        right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
-        missile: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
-        laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
-      };
-        //Ship
+      //Choice Ship
       if(this.game.config._playerShip == 1){
         this.ship.setTexture('ship1');
         console.log("ship1 creata");
@@ -55,6 +50,15 @@ class SinglePlayerScene extends Phaser.Scene {
         x: 100,
         y: 400
       });
+
+      this.bullets = this.physics.add.group({
+        classType: Bullet,
+        maxSize: 30,
+        runChildUpdate: true,
+        frameQuantity: 5,
+      });
+
+      this.ship.assignBullets(this.bullets);
     }
 
     update(){
