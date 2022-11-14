@@ -1,14 +1,12 @@
-var Bullet = new Phaser.Class({
+var Laser = new Phaser.Class({
 
     Extends: Phaser.GameObjects.Image,
 
     initialize:
 
-    function Bullet (scene)
+    function Missile (scene)
     {
-        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'laser');
-        	
-        //this.setScale(0.3);		
+        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'laser');	
         this.setBlendMode(1);
         this.setDepth(1);
         this.durata = 1000;
