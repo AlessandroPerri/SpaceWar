@@ -9,7 +9,7 @@ class OptionsScene extends Phaser.Scene {
     
         this.load.image("gravity", "assets/images/ButtonGravity.png");
     
-        this.load.image("planet", "assets/images/ButtonPlanet.png");
+        this.load.image("planetBt", "assets/images/ButtonPlanet.png");
 
         this.load.image("spaceship", "assets/images/ButtonSpaceship.png");
 
@@ -25,7 +25,7 @@ class OptionsScene extends Phaser.Scene {
     
         //Aggiungo i bottoni  
         this.gravityButton = this.add.image(this.game.renderer.width / 2 - 300, this.game.renderer.height / 2 - 50 , "gravity");
-        this.planetButton  = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 - 50, "planet");
+        this.planetButton  = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 - 50, "planetBt");
         
         this.gravityButtonSelected = this.add.image(this.game.renderer.width / 2 - 300, this.game.renderer.height / 2 - 50 , "gravitySelected");
         this.planetButtonSelected = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 - 50, "planetSelected");

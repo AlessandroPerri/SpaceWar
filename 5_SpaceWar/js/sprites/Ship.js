@@ -13,12 +13,16 @@ class Ship extends Phaser.GameObjects.Sprite{
 
         this.body.setMaxVelocity(200);
         this.body.setCollideWorldBounds(true);    
-        
-        this.body.angle= this.body.angle - angolo;
 
+        this.body.allowGravity = false;
+        this.body.setCircle(28, 6, 7);
+
+        this.angolo1 = angolo;
+        this.body.angle= this.angolo1
         this.vita = life;
         this.energia = energy;
     }
+
     assignMissiles(missiles){
         this.missiles = missiles;
     }
@@ -26,8 +30,9 @@ class Ship extends Phaser.GameObjects.Sprite{
     assignLasers(lasers){
         this.lasers = lasers;
     }
-
     update(keys){
+        this.body.angle= this.body.angle - this.angolo1;
+        console.log('Angle: '+ this.body.angle);
         console.log('energy: '+ this.energia);
         if(this.vita > 0){
             if(keys == null){
@@ -67,7 +72,7 @@ class Ship extends Phaser.GameObjects.Sprite{
             
                     if (missile && this.energia > 0)
                     {
-                        missile.fire(this, 500);      
+                        missile.fire(this, 1000);      
                         
                         this.energia = this.energia - 1;
     
@@ -87,11 +92,9 @@ class Ship extends Phaser.GameObjects.Sprite{
                         
                         this.energia = this.energia - 0.5;
     
-                        console.log('Laser sparato') 
-                        //missile.trackSprite(player, 0, 0, true);
+                        console.log('Laser sparato');
                         
                     }
-                     
                 }
             }
         }

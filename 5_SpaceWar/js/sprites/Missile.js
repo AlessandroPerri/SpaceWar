@@ -21,8 +21,9 @@ var Missile = new Phaser.Class({
         this.setAngle(ship.body.rotation);
         this.setPosition(ship.x, ship.y);
 
-        this.body.reset(ship.x, ship.y);
-        this.body.setSize(this.width, this.height, true);
+        this.body.setCircle(1, 46, 10);
+        //this.body.reset(ship.x, ship.y);
+        //this.body.setSize(this.width, this.height, true);
 
         var angle = Phaser.Math.DegToRad(ship.body.rotation);
         this.scene.physics.velocityFromRotation(angle, speed, this.body.velocity);

@@ -20,6 +20,7 @@ var config = {
   _energyShip: 3,
   _life2Ship: 3,
   _energy2Ship: 3,
+  _angleShip: 0,
   scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene],
 
  
@@ -27,6 +28,9 @@ var config = {
 
 }
 var game = new Phaser.Game(config);
+
+
+//variabili globali
 game.config._playerShip = 1;
 game.config._planetIndex = 0;
 game.config._gravityIndex = 0;
@@ -35,3 +39,4 @@ game.config._lifeShip= 3;
 game.config._energyShip= 3;
 game.config._life2Ship= 3;
 game.config._energy2Ship= 3;
+game.config._angleShip= 0;

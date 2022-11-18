@@ -10,20 +10,25 @@ var Laser = new Phaser.Class({
         this.setBlendMode(1);
         this.setDepth(1);
         this.durata = 1000;
+        
+
     },
 
     fire: function (ship, speed)
     {
         this.durata = 1000;
+        
 
         this.setActive(true);
         this.setVisible(true);
 
         this.setAngle(ship.body.rotation);
         this.setPosition(ship.x, ship.y);
-
-        this.body.reset(ship.x, ship.y);
-        this.body.setSize(this.width, this.height, true);
+        this.body.setCircle(1, 120, 12);
+        //this.body.reset(ship.x, ship.y);
+        //this.body.setSize(this.width, this.height, true);
+        //this.body.setSize(1, 1);
+        //this.body.updateBounds();
 
         var angle = Phaser.Math.DegToRad(ship.body.rotation);
         this.scene.physics.velocityFromRotation(angle, speed, this.body.velocity);
