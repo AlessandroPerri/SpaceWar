@@ -21,7 +21,8 @@ var config = {
   _life2Ship: 3,
   _energy2Ship: 3,
   _angleShip: 0,
-  scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene],
+  _distruggi: 0,
+  scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene, GameOverScene],
 
  
 
@@ -40,3 +41,4 @@ game.config._energyShip= 3;
 game.config._life2Ship= 3;
 game.config._energy2Ship= 3;
 game.config._angleShip= 0;
+game.config._distruggi= 0;

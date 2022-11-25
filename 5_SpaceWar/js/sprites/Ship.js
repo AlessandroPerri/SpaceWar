@@ -1,7 +1,7 @@
 class Ship extends Phaser.GameObjects.Sprite{
-    constructor(config, angolo, energy, life){
+    constructor(config, angolo, energy, life, gravity, planet){
         super(config.scene, config.x, config.y, config.texture);
-
+        this.config = config;
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
 
@@ -21,6 +21,9 @@ class Ship extends Phaser.GameObjects.Sprite{
         this.body.angle= this.angolo1
         this.vita = life;
         this.energia = energy;
+        this.gravita = gravity;
+        this.pianeta = planet;
+        this.timedEvent;
     }
 
     assignMissiles(missiles){
@@ -30,10 +33,28 @@ class Ship extends Phaser.GameObjects.Sprite{
     assignLasers(lasers){
         this.lasers = lasers;
     }
-    update(keys){
-        this.body.angle= this.body.angle - this.angolo1;
-        console.log('Angle: '+ this.body.angle);
+
+    assignPlanet(planet){
+        this.planet = planet;
+    }
+    
+    create(){       
+        //this.timer = this.time.addEvent({ delay: 1000, callback: this.rechargeEnergy});
+        
+        //this.timedEvent = this.time.delayedCall(1000, rechargeEnergy);
+        this.timedEvent = this.config.scene.time.addEvent({ delay: 1000, callback: this.rechargeEnergy, callbackScope: this, loop: true });
+
+        
+        
+    }
+    rechargeEnergy(){   
         console.log('energy: '+ this.energia);
+        if(this.energia < 3){    
+            this.energia += 0.5;
+        }
+    }
+    update(keys){
+        //console.log('energy: '+ this.energia);
         if(this.vita > 0){
             if(keys == null){
             
@@ -72,14 +93,14 @@ class Ship extends Phaser.GameObjects.Sprite{
             
                     if (missile && this.energia > 0)
                     {
+                        let offset = new Phaser.Geom.Point(0, -this.body.height / 2);
+                        Phaser.Math.Rotate(offset, this.body.rotation);
+
                         missile.fire(this, 1000);      
                         
-                        this.energia = this.energia - 1;
+                        //this.energia = this.energia - 1;
     
-                        console.log('Missile sparato')
-                        //this.nextFire = this.time + this.fireRate;
-                        //missile.trackSprite(player, 0, 0, true);
-                        
+                        console.log('Missile sparato');
                     }  
         
                 //E cliccato
@@ -88,17 +109,32 @@ class Ship extends Phaser.GameObjects.Sprite{
             
                     if (laser && this.energia > 0)
                     {
-                        laser.fire(this, 800);     
-                        
+                        let offset = new Phaser.Geom.Point(0, -this.body.height / 2);
+                        Phaser.Math.Rotate(offset, this.body.rotation);
+
+                        laser.fire(this, 800);
                         this.energia = this.energia - 0.5;
-    
+                        
                         console.log('Laser sparato');
                         
                     }
                 }
             }
         }
-        
-        //this.scene.physics.world.wrap(this.body, 32);
+        if(this.gravita == 1){
+            //var planet = this.planet.get();
+            // Calculate gravity as the normalised vector from the ship to the planet
+            //this.body.gravity = new Phaser.Point(planet.body.x - this.body.x, planet.body.y - this.body.y);
+            // Normalize and multiply by actual strength of gravity desired
+            this.body.gravity = this.body.gravity.normalize().multiply(100, 100);
+        }else if(this.gravita == 1 && this.pianeta == 1){
+            this.body.gravity = new Phaser.Point(planet.body.x - this.body.x, planet.body.y - this.body.y);
+            
+            this.body.gravity = this.body.gravity.normalize().multiply(5000, 5000);
+        }
+
+
+
     }
+
 }

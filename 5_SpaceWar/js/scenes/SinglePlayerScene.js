@@ -5,6 +5,7 @@ class SinglePlayerScene extends Phaser.Scene {
     constructor() {
       super({key: 'SinglePlayerScene'});
       //this.ship;
+      
     }
     
   
@@ -13,18 +14,17 @@ class SinglePlayerScene extends Phaser.Scene {
         this.load.image("ship2", "assets/images/ship2.png");
         this.load.image("missile", "assets/images/Missile.png");
         this.load.image("laser", "assets/images/Laser.png");
-        this.load.image("planet", "assets/images/Planet.png");
-        this.load.image('explosion', 'assets/images/Explosion.png')
-        
+        this.load.image("planet", "assets/images/Planet.png");       
     }
   
     create() {
+      
       //SHIP--------------------------------------------------------------
-
       this.createShip();
       //this.createShip2();
 
       //Keys player1
+     
       this.player1Keys = {
         up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
         left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
@@ -33,6 +33,19 @@ class SinglePlayerScene extends Phaser.Scene {
         missile: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
         laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E)
       };
+     
+     /*
+      //Keys player2
+      this.player1Keys = {
+        up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_EIGHT),
+        left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR),
+        special: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_FIVE),
+        right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_SIX),
+        missile: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_SEVEN),
+        laser: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NUMPAD_NINE)
+      };
+      */
+      
 
       //collide missile
       this.physics.add.overlap(this.ship, this.missiles, this.collideMissileShip);
@@ -41,18 +54,19 @@ class SinglePlayerScene extends Phaser.Scene {
       this.physics.add.overlap(this.ship, this.lasers, this.collideLaserShip);
 
       //PLANET--------------------------------------------------------------
-
       if(this.game.config._planetIndex == 1){      
         this.createPlanet();
 
         //collide ship
         this.physics.add.overlap(this.planet, this.ship,  this.collideShipPlanet);
-
+        
         //collide laser
         this.physics.add.overlap(this.planet, this.lasers, this.collideLaserPlanet);
-
+        
         //collide missile
         this.physics.add.overlap(this.planet, this.missiles, this.collideMissilePlanet);
+
+       
       }
     }
 
@@ -108,7 +122,7 @@ class SinglePlayerScene extends Phaser.Scene {
           texture: 'ship2',
           x: 1300,
           y: 450,
-        }, this.game.config._angleShip, this.game.config._energyShip, this.game.config._lifeShip);
+        }, this.game.config._angleShip, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex);
         console.log("energy: " + this.game.config._energyShip)
 
       //Se la ship selezionata = 2
@@ -118,7 +132,7 @@ class SinglePlayerScene extends Phaser.Scene {
           texture: 'ship1',
           x: 1300,
           y: 450,
-        }, this.game.config._angleShip, this.game.config._energyShip, this.game.config._lifeShip);
+        }, this.game.config._angleShip, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex);
         console.log("energy: " + this.game.config._energyShip)
         console.log("Angle: " + this.game.config._angleShip)
         
@@ -148,34 +162,41 @@ class SinglePlayerScene extends Phaser.Scene {
         x: 700,
         y: 450,
       });
+	    
     }
 
-    //CREAZIONE ESPLOSIONE-----------------------------------------------------
-
     //COLLISIONI-----------------------------------------------------
-
+    
     //collisioni ship
+    
     collideMissileShip(ship, missile){
       missile.destroy();
-      this.game.config._lifeShip--;
-      if(this.game.config._lifeShip == 0){
-        ship.visible = false;
-        ship.body.enable = false;
-      }
+      //ship.vita -= 1;
+      ship.vita = ship.vita -1;
+      
+      //this.game.config._lifeShip -= 1;
+      //if(this.game.config._lifeShip == 0){
+        
+      //}
+      
     }
     collideLaserShip(ship, laser){
       laser.destroy();
-      this.game.config._lifeShip -= 0.5;
-      if(this.game.config._lifeShip == 0){
-        ship.visible = false;
-        ship.body.enable = false;
-      }
+      //ship.vita -= 0.5;
+      ship.vita = ship.vita -0.5;
+      //this.game.config._lifeShip -= 0.5;
+      //if(this.game.config._lifeShip == 0){
+      //  
+      //}
     }
-
-    
+   
     //collisioni pianeta
+
     collideShipPlanet(planet, ship){
       //nella ship non faccio destroy perché altrimenti mi da errori nella creazione della ship
+      //this.game.config._distruggi = 1;
+      //ship.vita -= 100;
+      ship.vita = ship.vita -100;
       ship.visible = false;
       ship.body.enable = false;
     }
@@ -188,21 +209,22 @@ class SinglePlayerScene extends Phaser.Scene {
     }
 
 
+    updateHUD(){
+      //TODO mostrare testo e vita delle navi
+    }
     update(){
       this.ship.update(this.player1Keys); 
-      
-      if(this.game.config._planetIndex == 1){      
-        this.planet.update(0.2); 
+      //this.updateHUD();
+      if (this.ship.vita <= 0){
+        console.log("distruggi: " + this.game.config._distruggi);
+        this.scene.start("GameOverScene");
       }
-     
-  
-      /*
-      // Calculate gravity as the normalised vector from the ship to the planet
-      this.ship.gravity = new Phaser.Point(this.planet.x - this.ship.x, this.planet.y - this.ship.y);
+      
+      
 
-      // Normalize and multiply by actual strength of gravity desired
-      this.ship.gravity = this.ship.gravity.normalize().multiply(300, 300);
-      */
+      if(this.game.config._planetIndex == 1){      
+        this.planet.update(0.2);  
+      }
     }
 
     

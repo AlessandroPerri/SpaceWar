@@ -23,11 +23,7 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
-    //VARIABILI GLOBALI
-    
-    this.registry.set('playerShip', 1);
-    this.registry.set('gravityIndex', 0);
-    this.registry.set('planetIndex', 0);
+
     
 
 

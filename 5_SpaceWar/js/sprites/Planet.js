@@ -10,6 +10,7 @@ class Planet extends Phaser.GameObjects.Sprite{
 
         this.body.setCircle(92, 7, 7);
         this.body.setImmovable(true);
+        this.body.setGravityY(100);
 
     }
 
