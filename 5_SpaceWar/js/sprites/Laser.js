@@ -9,15 +9,12 @@ var Laser = new Phaser.Class({
         Phaser.GameObjects.Image.call(this, scene, 0, 0, 'laser');	
         this.setBlendMode(1);
         this.setDepth(1);
-        this.durata = 1000;
         
 
     },
 
     fire: function (ship, speed)
     {
-        this.durata = 1000;
-
         this.setActive(true);
         this.setVisible(true);
 
@@ -35,19 +32,6 @@ var Laser = new Phaser.Class({
         //this.body.setSize(1, 1);
 
     },
-
-    update: function (time, delta)
-    {
-        this.durata -= delta;
-
-        if (this.durata <= 0)
-        {
-            this.setActive(false);
-            this.setVisible(false);
-            this.body.stop();
-        }
-        
-    }
 
 });
     

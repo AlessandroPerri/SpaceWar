@@ -22,6 +22,9 @@ var config = {
   _energy2Ship: 3,
   _angleShip: 0,
   _distruggi: 0,
+  _special1: 1,
+  _special2: 2,
+  _velocita: 200,
   scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene, GameOverScene],
 
  
@@ -36,9 +39,17 @@ game.config._playerShip = 1;
 game.config._planetIndex = 0;
 game.config._gravityIndex = 0;
 game.config._speedBullet= 500;
+
 game.config._lifeShip= 3;
 game.config._energyShip= 3;
+
 game.config._life2Ship= 3;
 game.config._energy2Ship= 3;
+
 game.config._angleShip= 0;
 game.config._distruggi= 0;
+
+game.config._special1= 1;
+game.config._special2= 2;
+
+game.config._velocita= 200;

@@ -14,7 +14,6 @@ class GameOverScene extends Phaser.Scene {
         this.restart.on("pointerup", () => {
             this.scene.start("PlayScene");
         })
-        this.add.text(300, 900, 'Game Over - Click to start restart', { font: '16px Courier', fill: '#00ff00' });
     }
 
   
