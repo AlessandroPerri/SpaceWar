@@ -65,6 +65,7 @@ class SpaceshipScene extends Phaser.Scene {
       }
 
       update() {
+        
         if(this.game.config._playerShip == 1){
           //Ship1Selected
           this.ship1ButtonSelected.visible = true;

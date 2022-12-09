@@ -23,10 +23,6 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
-
-    
-
-
     //Metto bg e title
     this.add.image(0, 0, "background").setOrigin(0,0);
     this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "title").setDepth(1);
@@ -36,7 +32,6 @@ class Menu extends Phaser.Scene {
     this.optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 85, "options");
     this.instructionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 170, "instructions");
     this.exitButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 255, "exit");
-
 
     //play
     this.playButton.setInteractive();
@@ -61,6 +56,7 @@ class Menu extends Phaser.Scene {
     this.exitButton.on("pointerup", () => {
       window.close();
     })
+    
   }
 
   update(){

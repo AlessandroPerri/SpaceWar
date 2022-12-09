@@ -7,7 +7,7 @@ class PlayScene extends Phaser.Scene {
     
         this.load.image("back", "assets/images/ButtonBack.png");
     
-        this.load.image("singlePlayer", "assets/images/ButtonSinglePlayer.png");
+        this.load.image("singlePlayer", "assets/images/ButtonXsinglePlayer.png");
     
         this.load.image("dualPlayer", "assets/images/ButtonDualPlayer.png");
     
@@ -21,7 +21,7 @@ class PlayScene extends Phaser.Scene {
         this.singleButton = this.add.image(this.game.renderer.width / 2 - 200, this.game.renderer.height / 2 - 50 , "singlePlayer");
         this.dualButton = this.add.image(this.game.renderer.width / 2 + 200, this.game.renderer.height / 2 - 50, "dualPlayer");
         this.backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 200, "back");
-    
+
         //SinglePlayer
         this.singleButton.setInteractive();
         this.singleButton.on("pointerup", () => {
@@ -41,9 +41,11 @@ class PlayScene extends Phaser.Scene {
         this.backButton.on("pointerup", () => {
             this.scene.start("MenuGame");
         })
+    
       }
 
       update(){
+        
         console.log("setting up playerShip: " + this.registry.get('playerShip'));
       }      
 }

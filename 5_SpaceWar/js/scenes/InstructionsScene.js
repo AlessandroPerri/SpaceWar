@@ -22,6 +22,9 @@ class InstructionsScene extends Phaser.Scene {
         //Aggiungo i bottoni  
         this.backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 200, "back");
     
+        
+      }
+      update(){
         //Back
         this.backButton.setInteractive();
         this.backButton.on("pointerup", () => {

@@ -76,6 +76,7 @@ class OptionsScene extends Phaser.Scene {
         this.backButton.on("pointerup", () => {
             this.scene.start("MenuGame");
         })
+
       }
 
       update() {

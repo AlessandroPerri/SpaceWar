@@ -24,10 +24,23 @@ class SinglePlayerScene extends Phaser.Scene {
       this.load.image("halfEnergy", "assets/images/HalfEnergy.png");  
       this.load.image("star", "assets/images/Star.png");     
       this.load.image("starGrey", "assets/images/StarGrey.png"); 
+
+      this.load.image("back", "assets/images/ButtonBack.png");
+      this.load.image("elaborazione", "assets/images/Elaborazione.png");
       
   }
 
   create() {
+    this.backButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 200, "back");
+    this.text = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "elaborazione");
+    
+    //Back
+    this.backButton.setInteractive();
+    this.backButton.on("pointerup", () => {
+        this.scene.start("PlayScene");
+    })
+  }
+    /*
     this.createShip();
     this.createShip2();
     
@@ -405,8 +418,11 @@ class SinglePlayerScene extends Phaser.Scene {
       this.specialty2.setTexture('starGrey');
     }
 
+    
   }
-  update(){
+  */
+  update(){    
+    /*
     //Key
     this.ship.update(this.player1Keys); 
     this.ship2.update(this.player2Keys);
@@ -425,7 +441,6 @@ class SinglePlayerScene extends Phaser.Scene {
       console.log("distruggi: " + this.game.config._distruggi);
       this.scene.start("GameOverScene");
     }
-  
-    
+    */
   }  
 }
