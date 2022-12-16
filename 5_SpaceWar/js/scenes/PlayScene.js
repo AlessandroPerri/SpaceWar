@@ -46,6 +46,6 @@ class PlayScene extends Phaser.Scene {
 
       update(){
         
-        console.log("setting up playerShip: " + this.registry.get('playerShip'));
+        //console.log("setting up playerShip: " + this.registry.get('playerShip'));
       }      
 }

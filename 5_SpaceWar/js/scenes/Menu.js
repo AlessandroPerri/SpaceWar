@@ -5,19 +5,12 @@ class Menu extends Phaser.Scene {
 
   preload(){
     this.load.image("background", "assets/images/background.png");
-
     this.load.image("ship1", "assets/images/ship1.png");
-
     this.load.image("ship2", "assets/images/ship2.png");
-
     this.load.image("title", "assets/images/Title.png");
-
     this.load.image("play", "assets/images/ButtonPlay.png");
-
     this.load.image("options", "assets/images/ButtonOptions.png");
-
     this.load.image("instructions", "assets/images/ButtonInstructions.png");
-
     this.load.image("exit", "assets/images/ButtonExit.png");
 
   }
@@ -60,7 +53,7 @@ class Menu extends Phaser.Scene {
   }
 
   update(){
-    console.log(this.game.config._playerShip);
+    //console.log(this.game.config._playerShip);
   }
 
 }

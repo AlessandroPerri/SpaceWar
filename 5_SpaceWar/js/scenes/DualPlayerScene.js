@@ -93,16 +93,16 @@ class DualPlayerScene extends Phaser.Scene {
       this.physics.add.overlap(this.planet, this.missiles2, this.collideMissilePlanet);
     }
     //Timer per ricaricare l'energia
-    this.timedEvent = this.time.addEvent({ delay: 3000, callback: this.rechargeEnergy, callbackScope: this, loop: true });
+    this.timedEvent = this.time.addEvent({ delay: 1500, callback: this.rechargeEnergy, callbackScope: this, loop: true });
   }
 
   rechargeEnergy(){   
     //console.log('energy: '+ this.energia);
     if(this.ship.energia < 3){    
-        this.ship.energia += 0.5;
+        this.ship.energia += this.ship.rechargeRate;
     }
     if(this.ship2.energia < 3){    
-      this.ship2.energia += 0.5;
+      this.ship2.energia += this.ship2.rechargeRate;
   }
 }
 
@@ -120,7 +120,7 @@ class DualPlayerScene extends Phaser.Scene {
         x: 100,
         y: 450,
       }, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special1, this.game.config._velocita);
-      console.log("energy: " + this.game.config._energyShip)
+      //console.log("energy: " + this.game.config._energyShip)
 
     //Se la ship selezionata = 2
     }else if(this.game.config._playerShip == 2){
@@ -130,7 +130,7 @@ class DualPlayerScene extends Phaser.Scene {
         x: 100,
         y: 450,
       }, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special1, this.game.config._velocita);
-      console.log("energy: " + this.game.config._energyShip)
+      //console.log("energy: " + this.game.config._energyShip)
     }
 
     //Gruppo oggetti di tipo s
@@ -161,7 +161,7 @@ class DualPlayerScene extends Phaser.Scene {
         x: 1300,
         y: 450,
       }, this.game.config._energy2Ship, this.game.config._life2Ship, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special2, this.game.config._velocita);
-      console.log("energy: " + this.game.config._energy2Ship)
+      //console.log("energy: " + this.game.config._energy2Ship)
 
     //Se la ship selezionata = 2
     }else if(this.game.config._playerShip == 2){
@@ -171,8 +171,8 @@ class DualPlayerScene extends Phaser.Scene {
         x: 1300,
         y: 450,
       }, this.game.config._energy2Ship, this.game.config._life2Ship, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special2, this.game.config._velocita);
-      console.log("energy: " + this.game.config._energy2Ship)
-      console.log("Angle: " + this.game.config._angleShip)
+     // console.log("energy: " + this.game.config._energy2Ship)
+     // console.log("Angle: " + this.game.config._angleShip)
       
     }
     //Gruppo oggetti di tipo missile
@@ -407,7 +407,7 @@ class DualPlayerScene extends Phaser.Scene {
     }
 
   }
-  update(){
+  update(time, delta){
     this.ship.update(this.player1Keys); 
     this.ship2.update(this.player2Keys);
   
@@ -416,7 +416,7 @@ class DualPlayerScene extends Phaser.Scene {
 
     //GAMEOVER
     if (this.ship.vita <= 0 || this.ship2.vita <= 0){
-      console.log("distruggi: " + this.game.config._distruggi);
+      //console.log("distruggi: " + this.game.config._distruggi);
       this.scene.start("GameOverScene");
     }
   

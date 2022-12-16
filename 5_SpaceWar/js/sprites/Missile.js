@@ -6,13 +6,14 @@ var Missile = new Phaser.Class({
 
     function Missile (scene)
     {
-        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'missile');	
+        Phaser.GameObjects.Image.call(this, scene, -3, -3, 'missile');	
         this.setBlendMode(1);
         this.setDepth(1);
     },
 
     fire: function (ship, speed)
     {
+        this.lifespan = 1000;
         this.setActive(true);
         this.setVisible(true);
 
@@ -29,5 +30,17 @@ var Missile = new Phaser.Class({
         this.body.setCircle(1, 23, 10);
 
     },
+
+    update: function (time, delta)
+    {
+        this.lifespan -= delta;
+
+        if (this.lifespan <= 0)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+            this.body.stop();
+        }
+    }
 });
     

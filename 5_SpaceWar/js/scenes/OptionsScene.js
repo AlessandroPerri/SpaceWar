@@ -79,10 +79,7 @@ class OptionsScene extends Phaser.Scene {
 
       }
 
-      update() {
-
-        //console.log( this.registry.get('playerShip'));
-        
+      update() {       
         //gravity
         if(this.game.config._gravityIndex == 1){
           //GravitySelected
@@ -105,20 +102,6 @@ class OptionsScene extends Phaser.Scene {
           //PlanetSelected
           this.planetButtonSelected.visible = false;
           this.planetButton.visible = true;
-        }
-
-        if (  this.game.config._planetIndex === 'undefined' || this.game.config._gravityIndex === 'undefined'){
-          this.game.config._planetIndex = 0;
-          this.game.config._gravityIndex = 0;
-          //this.gameregistry.set('planetIndex', 0);
-          //this.gameregistry.set('gravityIndex', 0);
-
-        }else{
-          console.log("Ship: " + this.game.config._playerShip);
-          console.log("Planet: " + this.game.config._planetIndex);
-          console.log("Gravity: " + this.game.config._gravityIndex);
-          //console.log( this.registry.get('planetIndex'));
-          //console.log( this.game.config._planetIndex);
         }
       }     
 }

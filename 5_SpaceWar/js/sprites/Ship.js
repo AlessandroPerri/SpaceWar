@@ -24,6 +24,8 @@ class Ship extends Phaser.GameObjects.Sprite{
         this.special = specialita;
         this.vel = velocita;
         this.body.setMaxVelocity(this.vel);
+
+        this.rechargeRate = 0.5;
     }
 
     assignMissiles(missiles){
@@ -39,17 +41,18 @@ class Ship extends Phaser.GameObjects.Sprite{
     }
     
     update(keys){
-        console.log('energy: '+ this.energia);
-        console.log('Angle: '+ this.body.angle);
+        //console.log('energy: '+ this.energia);
+        //console.log('Angle: '+ this.body.angle);
         if(this.vita > 0){
             if(keys == null){
             
             }else{
                 //W
                 if(keys.up.isDown) {
-                    console.log('W key pressed');    
+                    //console.log('W key pressed');    
+                    //console.log('body accelleration: '+ this.body.acceleration)
                     this.scene.physics.velocityFromRotation(this.rotation, this.vel, this.body.acceleration);
-                    console.log('body accelleration: '+ this.body.acceleration)                                  
+                                                      
                     
     
                 } else{
@@ -58,13 +61,13 @@ class Ship extends Phaser.GameObjects.Sprite{
                 }
                 //A
                 if(keys.left.isDown) {
-                    console.log('A key pressed')
+                    //console.log('A key pressed')
+                    //console.log(this.body.angularVelocity);
+                    //console.log(this.body.angle);
                     this.body.setAngularVelocity(-200);
-                    console.log(this.body.angularVelocity);
-                    console.log(this.body.angle);
                 //D
                 } else if(keys.right.isDown) {
-                    console.log('D key pressed')
+                    //console.log('D key pressed')
                     this.body.setAngularVelocity(200);
                 }else{
                     this.body.setAngularVelocity(0);
@@ -81,7 +84,7 @@ class Ship extends Phaser.GameObjects.Sprite{
                         this.vita = 3;
                         this.energia = 0;
                         this.special -= 2;
-                        console.log(this.vita)
+                        //console.log(this.vita)
                     }
     
                 //Q
@@ -96,7 +99,7 @@ class Ship extends Phaser.GameObjects.Sprite{
                         missile.fire(this, 1000);      
                         this.energia = this.energia - 1;
     
-                        console.log('Missile sparato');
+                        //console.log('Missile sparato');
                     }  
         
                 //E cliccato
@@ -111,7 +114,7 @@ class Ship extends Phaser.GameObjects.Sprite{
                         laser.fire(this, 800);
                         this.energia = this.energia - 0.5;
                         
-                        console.log('Laser sparato');
+                        //console.log('Laser sparato');
                         
                     }
                 }

@@ -4,10 +4,10 @@ var config = {
   physics: {
       default: 'arcade',
       arcade: {
-          debug: true,
-          debugShowBody: true,
+          debug: false,
+          debugShowBody: false,
           debugShowStaticBody: false,
-          debugShowVelocity: true,          
+          debugShowVelocity: false,          
           gravity:{ y: 0}
       }
   },
@@ -25,11 +25,14 @@ var config = {
   _special1: 1,
   _special2: 2,
   _velocita: 200,
-  scene: [Menu, PlayScene, OptionsScene, InstructionsScene, SpaceshipScene, SinglePlayerScene, DualPlayerScene, GameOverScene],
-
- 
-
-
+  scene: [Menu, 
+          PlayScene, 
+          OptionsScene, 
+          InstructionsScene, 
+          SpaceshipScene, 
+          SinglePlayerScene,
+          DualPlayerScene,
+          GameOverScene],
 }
 var game = new Phaser.Game(config);
 

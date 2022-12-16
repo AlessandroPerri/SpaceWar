@@ -38,8 +38,8 @@ class SpaceshipScene extends Phaser.Scene {
         this.ship1Button.on("pointerdown", () => {
           this.game.config._playerShip = 1;
           //this.registry.set('playerShip', 1);
-          console.log( this.game.config._playerShip);
-          console.log('ship 1 clicked');
+          //console.log( this.game.config._playerShip);
+          //console.log('ship 1 clicked');
         })
 
         //Ship2Selected
@@ -51,15 +51,14 @@ class SpaceshipScene extends Phaser.Scene {
         this.ship2Button.on("pointerdown", () => {
           this.game.config._playerShip = 2;
           //this.registry.set('playerShip', 2);
-          console.log(this.game.config._playerShip);
-          console.log('ship 2 clicked');
+          //console.log(this.game.config._playerShip);
+          //console.log('ship 2 clicked');
         })
 
-        console.log( this.game.config.playerShip);
         //Back
         this.backButton.setInteractive();
         this.backButton.on("pointerup", () => {
-            console.log('back clicked');
+            //console.log('back clicked');
             this.scene.start("OptionsScene");
         })
       }
@@ -85,7 +84,7 @@ class SpaceshipScene extends Phaser.Scene {
           //this.registry.set('playerShip', 1);
           this.game.config._playerShip = 1;
         }else{
-          console.log( this.game.config._playerShip);
+          //console.log( this.game.config._playerShip);
         }
       }     
 }
