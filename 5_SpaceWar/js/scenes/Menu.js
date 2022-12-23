@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
     this.add.image(0, 0, "background").setOrigin(0,0);
     this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "title").setDepth(1);
 
-    //Aggiungo i bottoni
+    //Aggiungo i pulsanti
     this.playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "play");
     this.optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 85, "options");
     this.instructionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 170, "instructions");

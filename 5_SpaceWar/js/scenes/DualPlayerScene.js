@@ -97,21 +97,19 @@ class DualPlayerScene extends Phaser.Scene {
   }
 
   rechargeEnergy(){   
-    //console.log('energy: '+ this.energia);
+
     if(this.ship.energia < 3){    
         this.ship.energia += this.ship.rechargeRate;
     }
     if(this.ship2.energia < 3){    
       this.ship2.energia += this.ship2.rechargeRate;
+    }
   }
-}
 
 
 //CREAZIONE SHIP-----------------------------------------------------
   //SHIP 1--------------------------------  
   createShip(){
-    this.game.config._angleShip = 90;
-
     //Se la ship selezionata = 1
     if(this.game.config._playerShip == 1){
       this.ship = new Ship({
@@ -119,8 +117,12 @@ class DualPlayerScene extends Phaser.Scene {
         texture: 'ship1',
         x: 100,
         y: 450,
-      }, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special1, this.game.config._velocita);
-      //console.log("energy: " + this.game.config._energyShip)
+      }, this.game.config._energyShip, 
+         this.game.config._lifeShip, 
+         this.game.config._gravityIndex, 
+         this.game.config._planetIndex, 
+         this.game.config._special1, 
+         this.game.config._velocita);
 
     //Se la ship selezionata = 2
     }else if(this.game.config._playerShip == 2){
@@ -129,30 +131,29 @@ class DualPlayerScene extends Phaser.Scene {
         texture: 'ship2',
         x: 100,
         y: 450,
-      }, this.game.config._energyShip, this.game.config._lifeShip, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special1, this.game.config._velocita);
-      //console.log("energy: " + this.game.config._energyShip)
+      }, this.game.config._energyShip, 
+         this.game.config._lifeShip, 
+         this.game.config._gravityIndex, 
+         this.game.config._planetIndex, 
+         this.game.config._special1, 
+         this.game.config._velocita);
     }
 
-    //Gruppo oggetti di tipo s
+    //Gruppo oggetti di tipo missiles
     this.missiles = this.physics.add.group({
       classType: Missile,
-      maxSize: 30,
-      runChildUpdate: true,
     });
     this.ship.assignMissiles(this.missiles);
 
     //Gruppo oggetti di tipo laser
     this.lasers = this.physics.add.group({
       classType: Laser,
-      maxSize: 30,
-      runChildUpdate: true,
     });
     this.ship.assignLasers(this.lasers);
   }
 
   //SHIP 2--------------------------------  
   createShip2(){
-    this.game.config._angleShip = 180;
     //Se la ship selezionata = 1
     if(this.game.config._playerShip == 1){
       this.ship2 = new Ship({
@@ -160,7 +161,12 @@ class DualPlayerScene extends Phaser.Scene {
         texture: 'ship2',
         x: 1300,
         y: 450,
-      }, this.game.config._energy2Ship, this.game.config._life2Ship, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special2, this.game.config._velocita);
+      }, this.game.config._energy2Ship, 
+         this.game.config._life2Ship, 
+         this.game.config._gravityIndex, 
+         this.game.config._planetIndex, 
+         this.game.config._special2, 
+         this.game.config._velocita);
       //console.log("energy: " + this.game.config._energy2Ship)
 
     //Se la ship selezionata = 2
@@ -170,7 +176,12 @@ class DualPlayerScene extends Phaser.Scene {
         texture: 'ship1',
         x: 1300,
         y: 450,
-      }, this.game.config._energy2Ship, this.game.config._life2Ship, this.game.config._gravityIndex, this.game.config._planetIndex, this.game.config._special2, this.game.config._velocita);
+      }, this.game.config._energy2Ship, 
+         this.game.config._life2Ship, 
+         this.game.config._gravityIndex, 
+         this.game.config._planetIndex, 
+         this.game.config._special2, 
+         this.game.config._velocita);
      // console.log("energy: " + this.game.config._energy2Ship)
      // console.log("Angle: " + this.game.config._angleShip)
       
@@ -178,16 +189,14 @@ class DualPlayerScene extends Phaser.Scene {
     //Gruppo oggetti di tipo missile
     this.missiles2 = this.physics.add.group({
       classType: Missile,
-      maxSize: 30,
-      runChildUpdate: true,
+      //maxSize: 30,
+      //runChildUpdate: true,
     });
     this.ship2.assignMissiles(this.missiles2);
     
     //Gruppo oggetti di tipo laser
     this.lasers2 = this.physics.add.group({
       classType: Laser,
-      maxSize: 30,
-      runChildUpdate: true,
     });
     this.ship2.assignLasers(this.lasers2);
     this.ship2.angle = -180;
@@ -208,8 +217,8 @@ class DualPlayerScene extends Phaser.Scene {
   
   //collisioni ship
   collideShipShip(ship, ship2){
-    ship.vita = ship.vita - 100;
-    ship2.vita = ship2.vita - 100;
+    ship.vita = ship.vita - 10;
+    ship2.vita = ship2.vita - 10;
   }
  
   collideMissileShip(ship, missile){
@@ -221,15 +230,8 @@ class DualPlayerScene extends Phaser.Scene {
     ship.vita = ship.vita -0.5;
 
   }
-  //collisioni laser - missile
-  collideLaserMissile(missile, laser){
-    missile.destroy();
-    laser.destroy();
-  }
- 
   //collisioni pianeta
   collideShipPlanet(planet, ship){
-    //nella ship non faccio destroy perché altrimenti mi da errori nella creazione della ship
     ship.vita = ship.vita - 1;
   }
   collideMissilePlanet(planet, missile){
@@ -259,23 +261,32 @@ class DualPlayerScene extends Phaser.Scene {
       this.heart1.setTexture('halfHeart');
       this.heart2.setTexture('heart');
       this.heart3.setTexture('heart');
-    }else if(this.ship.vita == 2){
+    }
+    if(this.ship.vita == 2){
       this.heart1.setTexture('heartGrey');
+      this.heart2.setTexture('heart');
+      this.heart3.setTexture('heart');
     }
 
     //Cuore 2
     if(this.ship.vita == 1.5){
+      this.heart1.setTexture('heartGrey');
       this.heart2.setTexture('halfHeart');
       this.heart3.setTexture('heart');
-    }else if(this.ship.vita == 1){
+    }
+    if(this.ship.vita == 1){
       this.heart2.setTexture('heartGrey');
       this.heart1.setTexture('heartGrey');
+      this.heart3.setTexture('heart');
     }
 
     //Cuore 3
     if(this.ship.vita == 0.5){
+      this.heart2.setTexture('heartGrey');
+      this.heart1.setTexture('heartGrey');
       this.heart3.setTexture('halfHeart');
-    }else if(this.ship.vita == 0){
+    }
+    if(this.ship.vita == 0){
       this.heart3.setTexture('heartGrey');
       this.heart2.setTexture('heartGrey');
       this.heart1.setTexture('heartGrey');
@@ -296,23 +307,32 @@ class DualPlayerScene extends Phaser.Scene {
       this.energy1.setTexture('halfEnergy');
       this.energy2.setTexture('energy');
       this.energy3.setTexture('energy');
-    }else if(this.ship.energia == 2){
+    }
+    if(this.ship.energia == 2){
       this.energy1.setTexture('energyGrey');
+      this.energy2.setTexture('energy');
+      this.energy3.setTexture('energy');
     }
 
     //Fulmine 2
     if(this.ship.energia == 1.5){
+      this.energy1.setTexture('energyGrey');
       this.energy2.setTexture('halfEnergy');
       this.energy3.setTexture('energy');
-    }else if(this.ship.energia == 1){
+    }
+    if(this.ship.energia == 1){
       this.energy2.setTexture('energyGrey');
       this.energy1.setTexture('energyGrey');
+      this.energy3.setTexture('energy');
     }
 
     //Fulmine 3
     if(this.ship.energia == 0.5){
+      this.energy2.setTexture('energyGrey');
+      this.energy1.setTexture('energyGrey');
       this.energy3.setTexture('halfEnergy');
-    }else if(this.ship.energia == 0){
+    }
+    if(this.ship.energia == 0){
       this.energy3.setTexture('energyGrey');
       this.energy2.setTexture('energyGrey');
       this.energy1.setTexture('energyGrey');
@@ -341,23 +361,32 @@ class DualPlayerScene extends Phaser.Scene {
       this.heart4.setTexture('halfHeart');
       this.heart5.setTexture('heart');
       this.heart6.setTexture('heart');
-    }else if(this.ship2.vita == 2){
+    }
+    if(this.ship2.vita == 2){
       this.heart4.setTexture('heartGrey');
+      this.heart5.setTexture('heart');
+      this.heart6.setTexture('heart');
     }
 
     //Cuore 2
     if(this.ship2.vita == 1.5){
+      this.heart4.setTexture('heartGrey');
       this.heart5.setTexture('halfHeart');
       this.heart6.setTexture('heart');
-    }else if(this.ship2.vita == 1){
+    }
+    if(this.ship2.vita == 1){
       this.heart5.setTexture('heartGrey');
       this.heart4.setTexture('heartGrey');
+      this.heart6.setTexture('heart');
     }
 
     //Cuore 3
     if(this.ship2.vita == 0.5){
+      this.heart5.setTexture('heartGrey');
+      this.heart4.setTexture('heartGrey');
       this.heart6.setTexture('halfHeart');
-    }else if(this.ship2.vita == 0){
+    }
+    if(this.ship2.vita == 0){
       this.heart6.setTexture('heartGrey');
       this.heart5.setTexture('heartGrey');
       this.heart4.setTexture('heartGrey');
@@ -378,23 +407,32 @@ class DualPlayerScene extends Phaser.Scene {
       this.energy4.setTexture('halfEnergy');
       this.energy5.setTexture('energy');
       this.energy6.setTexture('energy');
-    }else if(this.ship2.energia == 2){
+    }
+    if(this.ship2.energia == 2){
       this.energy4.setTexture('energyGrey');
+      this.energy5.setTexture('energy');
+      this.energy6.setTexture('energy');
     }
 
     //Fulmine 2
     if(this.ship2.energia == 1.5){
+      this.energy4.setTexture('energyGrey');
       this.energy5.setTexture('halfEnergy');
       this.energy6.setTexture('energy'); 
-    }else if(this.ship2.energia == 1){
+    }
+    if(this.ship2.energia == 1){
       this.energy5.setTexture('energyGrey');
       this.energy4.setTexture('energyGrey');
+      this.energy6.setTexture('energy'); 
     }
 
     //Fulmine 3
     if(this.ship2.energia == 0.5){
+      this.energy5.setTexture('energyGrey');
+      this.energy4.setTexture('energyGrey');
       this.energy6.setTexture('halfEnergy');
-    }else if(this.ship2.energia == 0){
+    }
+    if(this.ship2.energia == 0){
       this.energy6.setTexture('energyGrey');
       this.energy5.setTexture('energyGrey');
       this.energy4.setTexture('energyGrey');
@@ -408,6 +446,7 @@ class DualPlayerScene extends Phaser.Scene {
 
   }
   update(time, delta){
+    
     this.ship.update(this.player1Keys); 
     this.ship2.update(this.player2Keys);
   
@@ -416,7 +455,6 @@ class DualPlayerScene extends Phaser.Scene {
 
     //GAMEOVER
     if (this.ship.vita <= 0 || this.ship2.vita <= 0){
-      //console.log("distruggi: " + this.game.config._distruggi);
       this.scene.start("GameOverScene");
     }
   

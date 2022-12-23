@@ -6,12 +6,8 @@ class Planet extends Phaser.GameObjects.Sprite{
         config.scene.add.existing(this);
 
         this.body.allowGravity = false;
-        this.body.setCollideWorldBounds(true); 
-
         this.body.setCircle(85, 7, 7);
         this.body.setImmovable(true);
-        this.body.setGravityY(100);
-
     }
 
     update(rotazione){

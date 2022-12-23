@@ -7,8 +7,9 @@ var Missile = new Phaser.Class({
     function Missile (scene)
     {
         Phaser.GameObjects.Image.call(this, scene, -3, -3, 'missile');	
-        this.setBlendMode(1);
-        this.setDepth(1);
+        
+        //this.setBlendMode(1);
+        //this.setDepth(1);
     },
 
     fire: function (ship, speed)
@@ -31,9 +32,9 @@ var Missile = new Phaser.Class({
 
     },
 
-    update: function (time, delta)
+    update: function ()
     {
-        this.lifespan -= delta;
+        this.lifespan -= 10;
 
         if (this.lifespan <= 0)
         {
