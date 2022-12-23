@@ -7,7 +7,7 @@ setlocal
 rem python -m SimpleHTTPServer 8080
 start "" http://localhost:8000
 set SCRIPT_PATH=%~dp0
-cd SpaceWar\5_SpaceWar
+cd SpaceWar\4_SpaceWar
 rem cd 5_SpaceWar
 "%SCRIPT_PATH%python38\python" server.py
 
