@@ -92,12 +92,11 @@ class DualPlayerScene extends Phaser.Scene {
       this.physics.add.overlap(this.planet, this.missiles, this.collideMissilePlanet);
       this.physics.add.overlap(this.planet, this.missiles2, this.collideMissilePlanet);
     }
+
     //Timer per ricaricare l'energia
     this.timedEvent = this.time.addEvent({ delay: 1500, callback: this.rechargeEnergy, callbackScope: this, loop: true });
   }
-
   rechargeEnergy(){   
-
     if(this.ship.energia < 3){    
         this.ship.energia += this.ship.rechargeRate;
     }
